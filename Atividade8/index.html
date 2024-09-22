@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário</title>
+</head>
+<body>
+    <h1>Questionário de Opinião</h1>
+    
+    <form id="form">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br><br>
+
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select><br><br>
+
+        <label for="opiniao">Opinião:</label>
+        <select id="opiniao" name="opiniao" required>
+            <option value="ótimo">Ótimo</option>
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+            <option value="péssimo">Péssimo</option>
+        </select><br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Resultados:</h2>
+    <p id="mediaIdade"></p>
+    <p id="idadeMaxima"></p>
+    <p id="idadeMinima"></p>
+    <p id="qtdPessimo"></p>
+    <p id="percentualBomOtimo"></p>
+    <p id="qtdHomens"></p>
+    <p id="qtdMulheres"></p>
+
+    <script>
+        let respostas = [];
+
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Coleta de dados
+            const idade = parseInt(document.getElementById('idade').value);
+            const sexo = document.getElementById('sexo').value;
+            const opiniao = document.getElementById('opiniao').value;
+            
+            respostas.push({ idade, sexo, opiniao });
+
+            // Cálculos:
+            let somaIdades = 0;
+            let idadeMaxima = -Infinity;
+            let idadeMinima = Infinity;
+            let qtdPessimo = 0;
+            let qtdBomOtimo = 0;
+            let qtdHomens = 0;
+            let qtdMulheres = 0;
+
+            respostas.forEach(resposta => {
+                somaIdades += resposta.idade;
+
+                if (resposta.idade > idadeMaxima) idadeMaxima = resposta.idade;
+                if (resposta.idade < idadeMinima) idadeMinima = resposta.idade;
+
+                if (resposta.opiniao === 'péssimo') qtdPessimo++;
+                if (resposta.opiniao === 'bom' || resposta.opiniao === 'ótimo') qtdBomOtimo++;
+
+                if (resposta.sexo === 'masculino') qtdHomens++;
+                if (resposta.sexo === 'feminino') qtdMulheres++;
+            });
+
+            const mediaIdade = somaIdades / respostas.length;
+            const percentualBomOtimo = (qtdBomOtimo / respostas.length) * 100;
+
+            // Exibir Resultados
+            document.getElementById('mediaIdade').innerText = `Média de idade: ${mediaIdade.toFixed(2)}`;
+            document.getElementById('idadeMaxima').innerText = `Idade máxima: ${idadeMaxima}`;
+            document.getElementById('idadeMinima').innerText = `Idade mínima: ${idadeMinima}`;
+            document.getElementById('qtdPessimo').innerText = `Quantidade que responderam péssimo: ${qtdPessimo}`;
+            document.getElementById('percentualBomOtimo').innerText = `Porcentagem de ótimo e bom: ${percentualBomOtimo.toFixed(2)}%`;
+            document.getElementById('qtdHomens').innerText = `Número de homens: ${qtdHomens}`;
+            document.getElementById('qtdMulheres').innerText = `Número de mulheres: ${qtdMulheres}`;
+        });
+    </script>
+</body>
+</html>

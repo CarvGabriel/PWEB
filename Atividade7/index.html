@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Pedra, Papel ou Tesoura</title>
+</head>
+<body>
+    <h1>Pedra, Papel ou Tesoura</h1>
+
+    <label for="escolha">Escolha:</label>
+    <select id="escolha">
+        <option value="pedra">Pedra</option>
+        <option value="papel">Papel</option>
+        <option value="tesoura">Tesoura</option>
+    </select>
+
+    <button id="jogar">Jogar</button>
+
+    <h2>Resultado</h2>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById('jogar').addEventListener('click', function() {
+            
+            const escolhaJogador = document.getElementById('escolha').value;
+
+            const escolhaComputador = Math.floor(Math.random() * 3);
+            let escolhaComputadorTexto;
+
+            switch (escolhaComputador) {
+                case 0:
+                    escolhaComputadorTexto = 'pedra';
+                    break;
+                case 1:
+                    escolhaComputadorTexto = 'papel';
+                    break;
+                case 2:
+                    escolhaComputadorTexto = 'tesoura';
+                    break;
+            }
+
+            let resultado;
+            if (escolhaJogador === escolhaComputadorTexto) {
+                resultado = "Empate!";
+            } else if (
+                (escolhaJogador === 'pedra' && escolhaComputadorTexto === 'tesoura') ||
+                (escolhaJogador === 'tesoura' && escolhaComputadorTexto === 'papel') ||
+                (escolhaJogador === 'papel' && escolhaComputadorTexto === 'pedra')
+            ) {
+                resultado = "Você venceu!";
+            } else {
+                resultado = "Computador venceu!";
+            }
+
+            document.getElementById('resultado').innerText = `Você escolheu: ${escolhaJogador} | Computador escolheu: ${escolhaComputadorTexto}\n${resultado}`;
+        });
+    </script>
+</body>
+</html>

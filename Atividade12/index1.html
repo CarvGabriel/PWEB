@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade12.1</title>
+</head>
+<body>
+    <h1>Calcular área</h1>
+    <div>
+        <label for="altura">Altura:</label>
+        <input id="altura" type="text">
+        <br>
+        <br>
+    </div>
+    <div>
+        <label for="base">Base:</label>
+        <input id="base" type="text">
+        <br>
+        <br>
+    </div>
+    <div>
+        <button onclick="calcArea()">Calcular</button>
+    </div>
+    <div id="saida"></div>
+    <script>
+        class Retangulo{
+            constructor(x, y){
+                this.altura = x;
+                this.base = y;
+            }
+
+            Area(){
+                return this.altura * this.base;
+            }
+        }
+        function calcArea(){
+            var x = document.getElementById("altura").value;
+            var y = document.getElementById("base").value;
+
+            var objRet = new Retangulo(x, y);
+            
+            document.getElementById("saida").innerHTML = `<br>Área: ${objRet.Area()}`;
+        }
+    </script>
+</body>
+</html>

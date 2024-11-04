@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade12.2</title>
+</head>
+<body>
+    <h1>Conta Corrente</h1>
+    <div>
+        <label for="nome">Nome:</label>
+        <input id="nome1" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="banco">Banco:</label>
+        <input id="banco1" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="numConta">Número da conta:</label>
+        <input id="numConta1" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="saldo">Saldo:</label>
+        <input id="saldo1" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="saldoEspecial">Saldo especial:</label>
+        <input id="saldoEspecial" type="text">
+        <br><br>
+    </div>
+
+    <h1>Conta Poupança</h1>
+    <div>
+        <label for="nome">Nome:</label>
+        <input id="nome2" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="banco">Banco:</label>
+        <input id="banco2" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="numConta">Número da conta:</label>
+        <input id="numConta2" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="saldo">Saldo:</label>
+        <input id="saldo2" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="juros">Juros:</label>
+        <input id="juros" type="text">
+        <br><br>
+    </div>
+    <div>
+        <label for="dtVencimento">Data de vencimento:</label>
+        <input id="dtVencimento" type="date">
+        <br><br>
+    </div>
+
+    <div>
+        <button onclick="mostraDados()">Mostrar Dados</button>
+    </div>
+    <div id="saida"></div>
+
+    <script>
+        class Conta {
+            constructor(nome, banco, numConta, saldo) {
+                this._nome = nome;
+                this._banco = banco;
+                this._numConta = numConta;
+                this._saldo = saldo;
+            }
+
+            get nome() {
+                return this._nome;
+            }
+
+            set nome(nome) {
+                this._nome = nome;
+            }
+
+            get banco() {
+                return this._banco;
+            }
+
+            set banco(banco) {
+                this._banco = banco;
+            }
+
+            get numConta() {
+                return this._numConta;
+            }
+
+            set numConta(numConta) {
+                this._numConta = numConta;
+            }
+
+            get saldo() {
+                return this._saldo;
+            }
+
+            set saldo(saldo) {
+                this._saldo = saldo;
+            }
+        }
+
+        class Corrente extends Conta {
+            constructor(nome, banco, numConta, saldo, saldoEspecial) {
+                super(nome, banco, numConta, saldo);
+                this._saldoEspecial = saldoEspecial;
+            }
+
+            get saldoEspecial() {
+                return this._saldoEspecial;
+            }
+
+            set saldoEspecial(saldoEspecial) {
+                this._saldoEspecial = saldoEspecial;
+            }
+        }
+
+        class Poupanca extends Conta {
+            constructor(nome, banco, numConta, saldo, juros, dtVencimento) {
+                super(nome, banco, numConta, saldo);
+                this._juros = juros;
+                this._dtVencimento = dtVencimento;
+            }
+
+            get juros() {
+                return this._juros;
+            }
+
+            set juros(juros) {
+                this._juros = juros;
+            }
+
+            get dtVencimento() {
+                return this._dtVencimento;
+            }
+
+            set dtVencimento(data) {
+                this._dtVencimento = data;
+            }
+        }
+
+        function mostraDados() {
+            // Coletando dados da conta corrente
+            var nomeCorrente = document.getElementById("nome1").value;
+            var bancoCorrente = document.getElementById("banco1").value;
+            var numCorrente = document.getElementById("numConta1").value;
+            var saldoCorrente = document.getElementById("saldo1").value;
+            var saldoEspecial = document.getElementById("saldoEspecial").value;
+
+            // Coletando dados da conta poupança
+            var nomePoupanca = document.getElementById("nome2").value;
+            var bancoPoupanca = document.getElementById("banco2").value;
+            var numPoupanca = document.getElementById("numConta2").value;
+            var saldoPoupanca = document.getElementById("saldo2").value;
+            var juros = document.getElementById("juros").value;
+            var dtVencimento = document.getElementById("dtVencimento").value;
+
+            // Criando instâncias das contas
+            const contaCorrente = new Corrente(nomeCorrente, bancoCorrente, numCorrente, saldoCorrente, saldoEspecial);
+            const contaPoupanca = new Poupanca(nomePoupanca, bancoPoupanca, numPoupanca, saldoPoupanca, juros, dtVencimento);
+
+            // Exibindo os dados
+            document.getElementById("saida").innerHTML = `<div>
+                                                            <h2>Conta Corrente:</h2>
+                                                            Nome: ${contaCorrente.nome}<br>
+                                                            Banco: ${contaCorrente.banco}<br>
+                                                            Número da Conta: ${contaCorrente.numConta}<br>
+                                                            Saldo: ${contaCorrente.saldo}<br>
+                                                            Saldo Especial: ${contaCorrente.saldoEspecial}<br><br>
+                                                          </div>
+                                                          <div>
+                                                            <h2>Conta Poupança:</h2>
+                                                            Nome: ${contaPoupanca.nome}<br>
+                                                            Banco: ${contaPoupanca.banco}<br>
+                                                            Número da Conta: ${contaPoupanca.numConta}<br>
+                                                            Saldo: ${contaPoupanca.saldo}<br>
+                                                            Juros: ${contaPoupanca.juros}<br>
+                                                            Data de Vencimento: ${contaPoupanca.dtVencimento}<br>
+                                                          </div>`;
+        }
+    </script>
+</body>
+</html>

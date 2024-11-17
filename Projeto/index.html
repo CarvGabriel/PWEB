@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadro Kanban</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="new-task" class="container new-task">
+        <div>
+            <div>
+                <label for="titulo">Título</label>
+                <input id="titulo" type="text">
+            </div>
+            <div>
+                <label for="descricao">Descrição</label>
+                <input id="descricao" type="text">
+            </div>
+            <div>
+                <label for="prioridade">Prioridade</label>
+                <select name="prioridade" id="prioridade">
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="dataVencimento">Data de vencimento</label>
+                <input id="dataVencimento" type="date">
+            </div>
+            <div>
+                <label for="responsaveis">Responsáveis</label>
+                <input id="responsaveis" type="text">
+            </div>
+            <div class="flex">
+                <div class="button2">
+                    <button onclick="addTask2()">Adicionar tarefa</button>
+                </div>
+                <div class="button3">
+                    <button id ="cancel" onclick="cancel()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h1>Tarefas Pessoais</h1>
+    <div class="container">
+        <div class="column">
+            <h2>A Fazer</h2>
+            <div id="col1" class="dropzone column1" name="drop-target" data-status="1"></div>
+        </div>
+        <div class="column">
+            <h2>Em Andamento</h2>
+            <div id="col2" class="dropzone column2" name="drop-target" data-status="2"></div>
+        </div>
+        <div class="column">
+            <h2>Concluído</h2>
+            <div id="col3" class="dropzone column3" name="drop-target" data-status="3"></div>
+        </div>
+    </div>
+    <div id="btn1">
+        <button onclick="addTask1()">Adicionar tarefa</button>
+    </div>
+
+    <script src="js/javascript.js"></script>
+    <script src="js/drag-drop.js"></script>
+</body>
+</html>
